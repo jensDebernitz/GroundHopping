@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -208,6 +209,56 @@ namespace GroundHopping
                 {
 
                 }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            sql.CommandText = "select * from groundHooping;";
+            OleDbDataReader reader = sql.ExecuteReader();
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog1.FileName;
+                StreamWriter sw = new StreamWriter(path);
+                
+
+                string outString = String.Empty;
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    outString += reader.GetName(i).ToString();
+                    
+                    if(i < reader.FieldCount - 1)
+                    {
+                        outString += ";";
+                    }
+                }
+
+                //outString += "\r\n";
+                sw.WriteLine(outString);
+                outString = String.Empty;
+
+                while (reader.Read())
+                {
+                    object[] row = new object[reader.FieldCount];
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        outString += reader[i];
+                        if (i < reader.FieldCount - 1)
+                        {
+                            outString += ";";
+                        }
+                    }
+
+                    //outString += "\r\n";
+                    sw.WriteLine(outString);
+                    outString = String.Empty;
+                }
+                reader.Close();
+
+                sw.Close();
             }
         }
     }
