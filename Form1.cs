@@ -35,6 +35,15 @@ namespace GroundHopping
             dateTimePickerDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerDate.CustomFormat = "dd.MM.yyyy";
 
+            readOutDataBaseAndInitialAutoComplete();
+
+            saveFileDialog1.Filter = "CSV|*.csv";
+            saveFileDialog1.Title = "Speichern CSV-Datei";
+        }
+
+        private void readOutDataBaseAndInitialAutoComplete()
+        {
+            //Read out the Data Base for the Auto Complete function
             sql.CommandText = "select * from groundHooping;";
             OleDbDataReader reader = sql.ExecuteReader();
 
@@ -131,12 +140,9 @@ namespace GroundHopping
             textBoxLand.AutoCompleteCustomSource = sourceLand;
             textBoxLand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxLand.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            saveFileDialog1.Filter = "CSV|*.csv";
-            saveFileDialog1.Title = "Speichern CSV-Datei";
         }
 
-        bool isNotInList(string[] inList, string newValue)
+        private bool isNotInList(string[] inList, string newValue)
         {
             bool returnValue = true;
 
@@ -224,15 +230,15 @@ namespace GroundHopping
             {
                 string path = saveFileDialog1.FileName;
                 StreamWriter sw = new StreamWriter(path);
-                
+
 
                 string outString = String.Empty;
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
                     outString += reader.GetName(i).ToString();
-                    
-                    if(i < reader.FieldCount - 1)
+
+                    if (i < reader.FieldCount - 1)
                     {
                         outString += ";";
                     }
