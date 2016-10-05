@@ -131,6 +131,9 @@ namespace GroundHopping
             textBoxLand.AutoCompleteCustomSource = sourceLand;
             textBoxLand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxLand.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            saveFileDialog1.Filter = "CSV|*.csv";
+            saveFileDialog1.Title = "Speichern CSV-Datei";
         }
 
         bool isNotInList(string[] inList, string newValue)
