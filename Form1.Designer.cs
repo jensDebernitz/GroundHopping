@@ -231,7 +231,7 @@
             this.Controls.Add(this.textBoxGastmanschft);
             this.Controls.Add(this.textBoxHeimmanschaft);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Ground Hopping";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
