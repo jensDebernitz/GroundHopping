@@ -44,7 +44,6 @@
             this.textBoxGastmanschaft = new System.Windows.Forms.TextBox();
             this.textBoxHeimmanschaft = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,10 +75,15 @@
             this.label12 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonChange = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.labelCountryPoints = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label7
@@ -217,19 +221,9 @@
             this.dataGridView1.Location = new System.Drawing.Point(15, 410);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1036, 193);
+            this.dataGridView1.Size = new System.Drawing.Size(1079, 193);
             this.dataGridView1.TabIndex = 35;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(834, 641);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "Auslesen";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // menuStrip1
             // 
@@ -551,11 +545,51 @@
             this.buttonChange.UseVisualStyleBackColor = true;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(834, 641);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Auslesen";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.labelCountryPoints);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Location = new System.Drawing.Point(923, 27);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(171, 369);
+            this.groupBox3.TabIndex = 43;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Info\'s";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(7, 20);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Länderpunkte";
+            // 
+            // labelCountryPoints
+            // 
+            this.labelCountryPoints.AutoSize = true;
+            this.labelCountryPoints.Location = new System.Drawing.Point(87, 20);
+            this.labelCountryPoints.Name = "labelCountryPoints";
+            this.labelCountryPoints.Size = new System.Drawing.Size(41, 13);
+            this.labelCountryPoints.TabIndex = 1;
+            this.labelCountryPoints.Text = "label18";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 676);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.groupBox2);
@@ -573,6 +607,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -596,7 +632,6 @@
         private System.Windows.Forms.TextBox textBoxGastmanschaft;
         private System.Windows.Forms.TextBox textBoxHeimmanschaft;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
@@ -628,6 +663,10 @@
         private System.Windows.Forms.ComboBox comboBoxFilterTo;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonChange;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label labelCountryPoints;
+        private System.Windows.Forms.Label label17;
     }
 }
 

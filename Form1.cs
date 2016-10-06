@@ -28,8 +28,9 @@ namespace GroundHopping
         };
 
 
-        private OleDbConnection con;
-        private OleDbCommand sql;
+        private OleDbConnection mCon;
+        private OleDbCommand mSql;
+        private Int64 mCountryCounter;
 
         public Form1()
         {
@@ -38,12 +39,12 @@ namespace GroundHopping
             string connect = "Provider=Microsoft.ACE.OLEDB.12.0;" +
                  "Data Source=..\\groundHooping.accdb";
 
-            con = new OleDbConnection(connect);
+            mCon = new OleDbConnection(connect);
 
             //Öffnen der Datenbank
-            con.Open();
+            mCon.Open();
 
-            sql = con.CreateCommand();
+            mSql = mCon.CreateCommand();
 
             // Set the Format type and the CustomFormat string.
             dateTimePickerDate.Format = DateTimePickerFormat.Custom;
@@ -68,8 +69,8 @@ namespace GroundHopping
         private void readOutDataBaseAndInitialAutoComplete()
         {
             //Read out the Data Base for the Auto Complete function
-            sql.CommandText = "select * from groundHooping;";
-            OleDbDataReader reader = sql.ExecuteReader();
+            mSql.CommandText = "select * from groundHooping;";
+            OleDbDataReader reader = mSql.ExecuteReader();
 
             string[] ManschaftsArray;
             string[] stadionArray;
@@ -90,6 +91,7 @@ namespace GroundHopping
             comboBoxFilterStadt.Items.Clear();
             comboBoxFilterLand.Items.Clear();
             comboBoxFilterDatum.Items.Clear();
+            mCountryCounter = 0;
 
             //werte aus der Datenbank holen und in Temporäre Arrays speichern
             while (reader.Read())
@@ -138,6 +140,7 @@ namespace GroundHopping
                     Array.Resize(ref landArray, landArray.Length + 1);
                     landArray[landArray.Length - 1] = neuerVerein;
                     comboBoxFilterLand.Items.Add(neuerVerein);
+                    mCountryCounter++;
                 }
 
                 neuerVerein = reader[(int)DataBaseEntrys.Bundesland].ToString();
@@ -188,6 +191,8 @@ namespace GroundHopping
             textBoxLand.AutoCompleteCustomSource = sourceLand;
             textBoxLand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxLand.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            labelCountryPoints.Text = mCountryCounter.ToString();
         }
 
         /*
@@ -291,7 +296,7 @@ namespace GroundHopping
         {
             checkBoxFilterEnable.Checked = false;
 
-            sql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
+            mSql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
                    " values('" + textBoxHeimmanschaft.Text + "', '"
                               + textBoxGastmanschaft.Text + "', '"
                               + dateTimePickerDate.Text + "', '"
@@ -300,7 +305,7 @@ namespace GroundHopping
                               + textBoxLand.Text + "', '"
                               + textBoxErgebnis.Text + "', '"
                               + comboBoxBundesland.SelectedItem.ToString() + "');";
-            sql.ExecuteNonQuery();
+            mSql.ExecuteNonQuery();
 
             label8.Text = comboBoxBundesland.SelectedItem.ToString();
 
@@ -334,7 +339,7 @@ namespace GroundHopping
          */
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            con.Close();
+            mCon.Close();
             Close();
         }
 
@@ -344,8 +349,8 @@ namespace GroundHopping
          */
         private void exportNachCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sql.CommandText = "select * from groundHooping;";
-            OleDbDataReader reader = sql.ExecuteReader();
+            mSql.CommandText = "select * from groundHooping;";
+            OleDbDataReader reader = mSql.ExecuteReader();
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -404,8 +409,8 @@ namespace GroundHopping
         //tue etwas auf der Datenbank
         private void doSomething(string q)
         {
-            sql.CommandText = q;
-            sql.ExecuteNonQuery();
+            mSql.CommandText = q;
+            mSql.ExecuteNonQuery();
             readOutTable();
             readOutDataBaseAndInitialAutoComplete();
         }
@@ -423,8 +428,8 @@ namespace GroundHopping
         //lese komplette daten bank aus
         public void readOutTable()
         {
-            sql.CommandText = "select * from groundHooping;";
-            OleDbDataReader reader = sql.ExecuteReader();
+            mSql.CommandText = "select * from groundHooping;";
+            OleDbDataReader reader = mSql.ExecuteReader();
             dataGridView1.Columns.Clear();
 
             //stelle denn Kopf der Tabelle her
@@ -518,6 +523,11 @@ namespace GroundHopping
             q = "update groundHooping set Bundesland='" + comboBoxBundesland.SelectedItem.ToString()
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
+        }
+
+        private void metroButtonReadOut_Click(object sender, EventArgs e)
+        {
+            readOutTable();
         }
     }
 }
