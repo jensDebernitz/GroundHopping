@@ -14,6 +14,20 @@ namespace GroundHopping
 {
     public partial class Form1 : Form
     {
+        enum DataBaseEntrys
+        {
+            ID, 
+            HeimManschaft,
+            GastManschaft,
+            Datum,
+            Stadion,
+            Stadt,
+            Land,
+            Ergebnis,
+            Bundesland
+        };
+
+
         private OleDbConnection con;
         private OleDbCommand sql;
 
@@ -23,10 +37,10 @@ namespace GroundHopping
 
             string connect = "Provider=Microsoft.ACE.OLEDB.12.0;" +
                  "Data Source=..\\groundHooping.accdb";
-            //string connect = "Provider=Microsoft.JET.OLEDB.4.0;" +
-            //     "Data Source=..\\groundHooping.mdb";
 
             con = new OleDbConnection(connect);
+
+            //Öffnen der Datenbank
             con.Open();
 
             sql = con.CreateCommand();
@@ -37,10 +51,18 @@ namespace GroundHopping
 
             readOutDataBaseAndInitialAutoComplete();
 
+            //Filter Funktion des Save File Dialog
             saveFileDialog1.Filter = "CSV|*.csv";
             saveFileDialog1.Title = "Speichern CSV-Datei";
+
+            //Die combox zum speichern des Bundeslandes soll standart mäßig auf Rheinland-Pfalz stehen
+            comboBoxBundesland.SelectedIndex = 11;
         }
 
+        /*
+         * Funtkion zum auslesen der Datenbank um die Autovervollständigung zu erhalten,
+         * sowie die comboboxen zu füllen für die filter funtion
+         */
         private void readOutDataBaseAndInitialAutoComplete()
         {
             //Read out the Data Base for the Auto Complete function
@@ -50,55 +72,71 @@ namespace GroundHopping
             string[] ManschaftsArray;
             string[] stadionArray;
             string[] landArray;
+            string[] bundeslandArray;
             string[] stadtArray;
 
             ManschaftsArray = new string[0];
             stadionArray = new string[0];
             landArray = new string[0];
+            bundeslandArray = new string[0];
             stadtArray = new string[0];
 
-
+            //werte aus der Datenbank holen und in Temporäre Arrays speichern
             while (reader.Read())
             {
-                string neuerVerein = reader[1].ToString();
+                string neuerVerein = reader[(int)DataBaseEntrys.HeimManschaft].ToString();
 
                 if (isNotInList(ManschaftsArray, neuerVerein))
                 {
                     Array.Resize(ref ManschaftsArray, ManschaftsArray.Length + 1);
                     ManschaftsArray[ManschaftsArray.Length - 1] = neuerVerein;
+                    comboBoxFilterHeimManschaft.Items.Add(neuerVerein);
                 }
 
-                neuerVerein = reader[2].ToString();
+                neuerVerein = reader[(int)DataBaseEntrys.GastManschaft].ToString();
 
                 if (isNotInList(ManschaftsArray, neuerVerein))
                 {
                     Array.Resize(ref ManschaftsArray, ManschaftsArray.Length + 1);
                     ManschaftsArray[ManschaftsArray.Length - 1] = neuerVerein;
+                    comboBoxFilterGastManschaft.Items.Add(neuerVerein);
                 }
 
 
-                neuerVerein = reader[4].ToString();
+                neuerVerein = reader[(int)DataBaseEntrys.Stadion].ToString();
 
                 if (isNotInList(stadionArray, neuerVerein))
                 {
                     Array.Resize(ref stadionArray, stadionArray.Length + 1);
                     stadionArray[stadionArray.Length - 1] = neuerVerein;
+                    comboBoxFilterStadion.Items.Add(neuerVerein);
                 }
 
-                neuerVerein = reader[5].ToString();
+                neuerVerein = reader[(int)DataBaseEntrys.Stadt].ToString();
 
                 if (isNotInList(stadtArray, neuerVerein))
                 {
                     Array.Resize(ref stadtArray, stadtArray.Length + 1);
                     stadtArray[stadtArray.Length - 1] = neuerVerein;
+                    comboBoxFilterStadt.Items.Add(neuerVerein);
                 }
 
-                neuerVerein = reader[6].ToString();
+                neuerVerein = reader[(int)DataBaseEntrys.Land].ToString();
 
                 if (isNotInList(landArray, neuerVerein))
                 {
                     Array.Resize(ref landArray, landArray.Length + 1);
                     landArray[landArray.Length - 1] = neuerVerein;
+                    comboBoxFilterLand.Items.Add(neuerVerein);
+                }
+
+                neuerVerein = reader[(int)DataBaseEntrys.Bundesland].ToString();
+
+                if (isNotInList(bundeslandArray, neuerVerein))
+                {
+                    Array.Resize(ref bundeslandArray, bundeslandArray.Length + 1);
+                    bundeslandArray[bundeslandArray.Length - 1] = neuerVerein;
+                    comboBoxFilterBundesland.Items.Add(neuerVerein);
                 }
 
 
@@ -142,6 +180,9 @@ namespace GroundHopping
             textBoxLand.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
+        /*
+         * Prüfen ob neuer string im string Array schon enthalten ist
+         */
         private bool isNotInList(string[] inList, string newValue)
         {
             bool returnValue = true;
@@ -156,49 +197,139 @@ namespace GroundHopping
             return returnValue;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            con.Close();
-            Close();
-        }
-
+        /*
+         * Click Funktion vom Auslese Button
+         */
         private void button2_Click(object sender, EventArgs e)
         {
             sql.CommandText = "select * from groundHooping;";
             OleDbDataReader reader = sql.ExecuteReader();
             dataGridView1.Columns.Clear();
 
-
+            //stelle denn Kopf der Tabelle her
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 dataGridView1.Columns.Add(reader.GetName(i), reader.GetName(i));
             }
 
+            //Daten aus der Datenbank anzeigen
             while (reader.Read())
             {
                 object[] row = new object[reader.FieldCount];
+                bool addedToDataGridView = false;
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    row[i] = reader[i];
+                    
+                    //Wenn die Filter FUnktion aktiviert ist
+                    //dann prüfe ob auch danach
+                    if(checkBoxFilterEnable.Checked == true)
+                    {
+                        addedToDataGridView = checkFilter(ref row, ref reader, i);
+                    }
+                    else
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
                 }
 
-                dataGridView1.Rows.Add(row);
+                //Zeile zur Tabelle hinzufügen
+                if(addedToDataGridView == true)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
+                
             }
             reader.Close();
         }
 
+        //Check der Filter Funktionen
+        //TODO: Datum funktioniert noch nicht, deshalb auch die ComboBox ausgegraut
+        private bool checkFilter(ref object[] row, ref OleDbDataReader reader, int i)
+        {
+            bool addedToDataGridView = false;
+
+            //Filter funktioniert wie folg:
+            //wenn die CheckBox Filter anwenden aktiviert ist,
+            //wird nach welchen Filterkriterien gefiltert werden soll
+
+            switch (comboBoxFilterTo.SelectedIndex)
+            {
+                case 0:
+                    if (comboBoxFilterHeimManschaft.SelectedItem.ToString() == reader[(int)DataBaseEntrys.HeimManschaft].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 1:
+                    if (comboBoxFilterGastManschaft.SelectedItem.ToString() == reader[(int)DataBaseEntrys.GastManschaft].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 2:
+                    if (comboBoxFilterDatum.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Datum].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 3:
+                    if (comboBoxFilterBundesland.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Bundesland].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 4:
+                    if (comboBoxFilterStadion.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Stadion].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 5:
+                    if (comboBoxFilterStadt.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Stadt].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                case 6:
+                    if (comboBoxFilterLand.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Land].ToString())
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return addedToDataGridView;
+        }
+
+        /*
+         * Button 3 == Speichern Button
+         * Hier werden die zuvor eingegebenen Daten in die datenbank geschrieben
+         */
         private void button3_Click(object sender, EventArgs e)
         {
-            sql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis)" +
+            sql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
                    " values('" + textBoxHeimmanschaft.Text + "', '"
                               + textBoxGastmanschft.Text + "', '"
                               + dateTimePickerDate.Text + "', '"
                               + textBoxStadion.Text + "', '"
                               + textBoxStadt.Text + "', '"
                               + textBoxLand.Text + "', '"
-                              + textBoxErgebnis.Text + "');";
+                              + textBoxErgebnis.Text + "', '"
+                              + comboBoxBundesland.SelectedItem.ToString() + "');";
             sql.ExecuteNonQuery();
+
+            label8.Text = comboBoxBundesland.SelectedItem.ToString();
 
             if (textBoxHeimmanschaft.Text.ToLower() == "1.fc köln"
                 || textBoxGastmanschft.Text.ToLower() == "1.fc köln")
@@ -221,7 +352,21 @@ namespace GroundHopping
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        /*
+         * Funktion zum Schliessen der Anwendung
+         * ACHTUNG: hier muss auch der zugriff der geöffneten Datenbank wieder geschlossen werden
+         */
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            con.Close();
+            Close();
+        }
+
+        /*
+         * Export Funktion 
+         * Hier wird eine Datei gespeichert im CSV Format
+         */
+        private void exportNachCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
             sql.CommandText = "select * from groundHooping;";
             OleDbDataReader reader = sql.ExecuteReader();
@@ -243,8 +388,7 @@ namespace GroundHopping
                         outString += ";";
                     }
                 }
-
-                //outString += "\r\n";
+                
                 sw.WriteLine(outString);
                 outString = String.Empty;
 
@@ -260,8 +404,7 @@ namespace GroundHopping
                             outString += ";";
                         }
                     }
-
-                    //outString += "\r\n";
+                    
                     sw.WriteLine(outString);
                     outString = String.Empty;
                 }
