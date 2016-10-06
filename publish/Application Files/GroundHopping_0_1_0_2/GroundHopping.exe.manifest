@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="GroundHopping.exe" version="0.1.0.2" publicKeyToken="60ffc219ba945a55" language="de" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="GroundHopping" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="GroundHopping.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC-Manifestoptionen
+             Wenn Sie die Ebene der Benutzerkontensteuerung für Windows ändern möchten, ersetzen Sie den 
+             Knoten "requestedExecutionLevel" wie folgt.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            Durch Angabe des Elements "requestedExecutionLevel" wird die Datei- und Registrierungsvirtualisierung deaktiviert. 
+            Entfernen Sie dieses Element, wenn diese Virtualisierung aus Gründen der Abwärtskompatibilität
+            für die Anwendung erforderlich ist.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GroundHopping.exe" size="29144">
+      <assemblyIdentity name="GroundHopping" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>38auyTkiHr9UvmO2o9r8SxwIMqMVcU5SMJbhLUqHBrc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="GroundHopping.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6N7MliNbVJSIAIPrecIshMbZ7zEoKLr5SQvud4LDUOw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Eine Liste der Windows-Versionen, unter denen diese Anwendung getestet
+           und für die sie entwickelt wurde. Wenn Sie die Auskommentierung der entsprechenden Elemente aufheben, 
+           wird von Windows automatisch die kompatibelste Umgebung ausgewählt. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=STEPHANXP\jdebernitz" issuerKeyHash="e1cfde92dd054568e4c7efe6e25b56a04835fc57" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>kQ1f49jKUm4LIV7qf4LcyhyYlZuSUe32Ob0dR7wMO2Q=</DigestValue></Reference></SignedInfo><SignatureValue>PzuIZcrI4QFOXL0+/GaG5fKpWQ0He+9Wl+6erWjVK6PiXTn6pdCmdg9fdm1MBulpHQfvEpBQFbDN82PBSNdExUEEl0LJ22ogKYIFT90jGG6ok2B560KESYOsnVp3JYjWy4AWW1vBL/kTT6TrgTOKMRFqdbyPvGB1ZU0uvQzEHV0=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>rX8cNaJ7bY1ZWKVgGJvUyaUR5WW0NFfGuly+O7t0INN1WACfxLJjySseh7IbtH5AAN3kloyENSL5DutVKb+9Wv3BpN/a2EdTOkTKDKwUlUmQ9tQJ/fKy+nJa5V7xDGjElt3k32WmHbKjUzITVhUXHjwh+Srcd3Z00IszUCCoD6M=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="643b0cbc471dbd39f6ed51929b95981ccadc827fea5e210b6e52cad8e35f0d91" Description="" Url=""><as:assemblyIdentity name="GroundHopping.exe" version="0.1.0.2" publicKeyToken="60ffc219ba945a55" language="de" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=STEPHANXP\jdebernitz</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>I9WQ6bqMDWsKq1JV58eM4i0o8ZY3l+XdUEh3fFZLYXM=</DigestValue></Reference></SignedInfo><SignatureValue>U2TCAr8/nKf1HXwTZWO+ZcxPRp6YfJgIp+2ov0biAgnyn9vPo9/lYIFrxr654/19SWA0lWkU0hOxGMqi1zwH7CJKCh5PB+dYzD1strU6XoOJLupyugZ/LoSEDbesMLzhjM9EsMHfYKf3WJkK5plKob5WPy4s+wV3nB9tYvDbECE=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>rX8cNaJ7bY1ZWKVgGJvUyaUR5WW0NFfGuly+O7t0INN1WACfxLJjySseh7IbtH5AAN3kloyENSL5DutVKb+9Wv3BpN/a2EdTOkTKDKwUlUmQ9tQJ/fKy+nJa5V7xDGjElt3k32WmHbKjUzITVhUXHjwh+Srcd3Z00IszUCCoD6M=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQKhAHitKFKpREViWeVtg71jANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigAUwBUAEUAUABIAEEATgBYAFAAXABqAGQAZQBiAGUAcgBuAGkAdAB6MB4XDTE2MTAwNjA3MzQwN1oXDTE3MTAwNjEzMzQwN1owMzExMC8GA1UEAx4oAFMAVABFAFAASABBAE4AWABQAFwAagBkAGUAYgBlAHIAbgBpAHQAejCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEArX8cNaJ7bY1ZWKVgGJvUyaUR5WW0NFfGuly+O7t0INN1WACfxLJjySseh7IbtH5AAN3kloyENSL5DutVKb+9Wv3BpN/a2EdTOkTKDKwUlUmQ9tQJ/fKy+nJa5V7xDGjElt3k32WmHbKjUzITVhUXHjwh+Srcd3Z00IszUCCoD6MCAwEAATANBgkqhkiG9w0BAQsFAAOBgQAh8GXIPEaiRkhzxY+sLog4zDlmqSqTFsWc8KOIfc4VOBwLkxHFcpxkODJHXwyZQjJMOZDUwIPnEILyI4pLOu6mk83TyYtcE34BvwfXOqoxXATJj2zY8HA119xtJ9f1FhQRbQmWPtQtS+cU3aqx6AZfX7Y5m7unqdQ1MvUwl2afbg==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
