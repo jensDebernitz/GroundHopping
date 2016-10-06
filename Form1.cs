@@ -413,5 +413,15 @@ namespace GroundHopping
                 sw.Close();
             }
         }
+
+        private void überToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            about mAbout = new about();
+
+            if(mAbout.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }
