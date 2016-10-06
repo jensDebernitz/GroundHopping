@@ -57,7 +57,7 @@ namespace GroundHopping
 
             //Die combox zum speichern des Bundeslandes soll standart mäßig auf Rheinland-Pfalz stehen
             comboBoxBundesland.SelectedIndex = 11;
-
+            comboBoxFilterTo.SelectedIndex = 0;
             readOutTable();
         }
 
@@ -289,6 +289,8 @@ namespace GroundHopping
          */
         private void button3_Click(object sender, EventArgs e)
         {
+            checkBoxFilterEnable.Checked = false;
+
             sql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
                    " values('" + textBoxHeimmanschaft.Text + "', '"
                               + textBoxGastmanschaft.Text + "', '"
@@ -445,6 +447,7 @@ namespace GroundHopping
                     if (checkBoxFilterEnable.Checked == true)
                     {
                         addedToDataGridView = checkFilter(ref row, ref reader, i);
+                        checkBoxFilterEnable.Checked = false;
                     }
                     else
                     {
