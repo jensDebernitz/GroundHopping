@@ -173,9 +173,9 @@ namespace GroundHopping
             textBoxHeimmanschaft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxHeimmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            textBoxGastmanschft.AutoCompleteCustomSource = sourceManschaften;
-            textBoxGastmanschft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBoxGastmanschft.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            textBoxGastmanschaft.AutoCompleteCustomSource = sourceManschaften;
+            textBoxGastmanschaft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBoxGastmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             textBoxStadion.AutoCompleteCustomSource = sourceStadion;
             textBoxStadion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -291,7 +291,7 @@ namespace GroundHopping
         {
             sql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
                    " values('" + textBoxHeimmanschaft.Text + "', '"
-                              + textBoxGastmanschft.Text + "', '"
+                              + textBoxGastmanschaft.Text + "', '"
                               + dateTimePickerDate.Text + "', '"
                               + textBoxStadion.Text + "', '"
                               + textBoxStadt.Text + "', '"
@@ -303,7 +303,7 @@ namespace GroundHopping
             label8.Text = comboBoxBundesland.SelectedItem.ToString();
 
             if (textBoxHeimmanschaft.Text.ToLower() == "1.fc köln"
-                || textBoxGastmanschft.Text.ToLower() == "1.fc köln")
+                || textBoxGastmanschaft.Text.ToLower() == "1.fc köln")
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
 
@@ -488,7 +488,7 @@ namespace GroundHopping
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
 
-            q = "update groundHooping set Gastmanschaft='" + textBoxGastmanschft.Text
+            q = "update groundHooping set Gastmanschaft='" + textBoxGastmanschaft.Text
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
 

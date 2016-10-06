@@ -41,7 +41,7 @@
             this.textBoxStadt = new System.Windows.Forms.TextBox();
             this.textBoxLand = new System.Windows.Forms.TextBox();
             this.textBoxStadion = new System.Windows.Forms.TextBox();
-            this.textBoxGastmanschft = new System.Windows.Forms.TextBox();
+            this.textBoxGastmanschaft = new System.Windows.Forms.TextBox();
             this.textBoxHeimmanschaft = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
@@ -195,13 +195,13 @@
             this.textBoxStadion.TabIndex = 20;
             this.textBoxStadion.Text = "Koblenz";
             // 
-            // textBoxGastmanschft
+            // textBoxGastmanschaft
             // 
-            this.textBoxGastmanschft.Location = new System.Drawing.Point(165, 50);
-            this.textBoxGastmanschft.Name = "textBoxGastmanschft";
-            this.textBoxGastmanschft.Size = new System.Drawing.Size(145, 20);
-            this.textBoxGastmanschft.TabIndex = 19;
-            this.textBoxGastmanschft.Text = "Eintracht Frankfurt";
+            this.textBoxGastmanschaft.Location = new System.Drawing.Point(165, 50);
+            this.textBoxGastmanschaft.Name = "textBoxGastmanschaft";
+            this.textBoxGastmanschaft.Size = new System.Drawing.Size(145, 20);
+            this.textBoxGastmanschaft.TabIndex = 19;
+            this.textBoxGastmanschaft.Text = "Eintracht Frankfurt";
             // 
             // textBoxHeimmanschaft
             // 
@@ -305,7 +305,7 @@
             this.groupBox1.Controls.Add(this.textBoxStadt);
             this.groupBox1.Controls.Add(this.textBoxLand);
             this.groupBox1.Controls.Add(this.textBoxStadion);
-            this.groupBox1.Controls.Add(this.textBoxGastmanschft);
+            this.groupBox1.Controls.Add(this.textBoxGastmanschaft);
             this.groupBox1.Controls.Add(this.textBoxHeimmanschaft);
             this.groupBox1.Location = new System.Drawing.Point(184, 27);
             this.groupBox1.Name = "groupBox1";
@@ -593,7 +593,7 @@
         private System.Windows.Forms.TextBox textBoxStadt;
         private System.Windows.Forms.TextBox textBoxLand;
         private System.Windows.Forms.TextBox textBoxStadion;
-        private System.Windows.Forms.TextBox textBoxGastmanschft;
+        private System.Windows.Forms.TextBox textBoxGastmanschaft;
         private System.Windows.Forms.TextBox textBoxHeimmanschaft;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
