@@ -16,7 +16,7 @@ namespace GroundHopping
     {
         enum DataBaseEntrys
         {
-            ID, 
+            ID,
             HeimManschaft,
             GastManschaft,
             Datum,
@@ -362,7 +362,7 @@ namespace GroundHopping
                         outString += ";";
                     }
                 }
-                
+
                 sw.WriteLine(outString);
                 outString = String.Empty;
 
@@ -378,7 +378,7 @@ namespace GroundHopping
                             outString += ";";
                         }
                     }
-                    
+
                     sw.WriteLine(outString);
                     outString = String.Empty;
                 }
@@ -388,16 +388,18 @@ namespace GroundHopping
             }
         }
 
+        //öffnen des Über Pop Ups
         private void überToolStripMenuItem_Click(object sender, EventArgs e)
         {
             about mAbout = new about();
 
-            if(mAbout.ShowDialog() == DialogResult.OK)
+            if (mAbout.ShowDialog() == DialogResult.OK)
             {
 
             }
         }
 
+        //tue etwas auf der Datenbank
         private void doSomething(string q)
         {
             sql.CommandText = q;
@@ -406,6 +408,7 @@ namespace GroundHopping
             readOutDataBaseAndInitialAutoComplete();
         }
 
+        //lösche aktuelle Zeile
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
@@ -415,6 +418,7 @@ namespace GroundHopping
             doSomething(q);
         }
 
+        //lese komplette daten bank aus
         public void readOutTable()
         {
             sql.CommandText = "select * from groundHooping;";
@@ -459,6 +463,7 @@ namespace GroundHopping
             reader.Close();
         }
 
+        //wenn die erste Spalte nicht null ist können wir nicht löschen und nicht ändern
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex > 0)
@@ -473,13 +478,13 @@ namespace GroundHopping
             }
         }
 
+        //ändere daten der aktuell angewählten zeile
         private void buttonChange_Click(object sender, EventArgs e)
         {
-            //string q = "delete from groundHooping where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
-            string q = "update groundHooping set Heimmanschaft='" + textBoxHeimmanschaft.Text 
+            string q = "update groundHooping set Heimmanschaft='" + textBoxHeimmanschaft.Text
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
 
