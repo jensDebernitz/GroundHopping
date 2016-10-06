@@ -57,6 +57,8 @@ namespace GroundHopping
 
             //Die combox zum speichern des Bundeslandes soll standart mäßig auf Rheinland-Pfalz stehen
             comboBoxBundesland.SelectedIndex = 11;
+
+            readOutTable();
         }
 
         /*
@@ -80,6 +82,14 @@ namespace GroundHopping
             landArray = new string[0];
             bundeslandArray = new string[0];
             stadtArray = new string[0];
+
+            comboBoxFilterHeimManschaft.Items.Clear();
+            comboBoxFilterGastManschaft.Items.Clear();
+            comboBoxFilterBundesland.Items.Clear();
+            comboBoxFilterStadion.Items.Clear();
+            comboBoxFilterStadt.Items.Clear();
+            comboBoxFilterLand.Items.Clear();
+            comboBoxFilterDatum.Items.Clear();
 
             //werte aus der Datenbank holen und in Temporäre Arrays speichern
             while (reader.Read())
@@ -202,46 +212,7 @@ namespace GroundHopping
          */
         private void button2_Click(object sender, EventArgs e)
         {
-            sql.CommandText = "select * from groundHooping;";
-            OleDbDataReader reader = sql.ExecuteReader();
-            dataGridView1.Columns.Clear();
-
-            //stelle denn Kopf der Tabelle her
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                dataGridView1.Columns.Add(reader.GetName(i), reader.GetName(i));
-            }
-
-            //Daten aus der Datenbank anzeigen
-            while (reader.Read())
-            {
-                object[] row = new object[reader.FieldCount];
-                bool addedToDataGridView = false;
-
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    
-                    //Wenn die Filter FUnktion aktiviert ist
-                    //dann prüfe ob auch danach
-                    if(checkBoxFilterEnable.Checked == true)
-                    {
-                        addedToDataGridView = checkFilter(ref row, ref reader, i);
-                    }
-                    else
-                    {
-                        row[i] = reader[i];
-                        addedToDataGridView = true;
-                    }
-                }
-
-                //Zeile zur Tabelle hinzufügen
-                if(addedToDataGridView == true)
-                {
-                    dataGridView1.Rows.Add(row);
-                }
-                
-            }
-            reader.Close();
+            readOutTable();
         }
 
         //Check der Filter Funktionen
@@ -350,6 +321,9 @@ namespace GroundHopping
 
                 }
             }
+
+            readOutDataBaseAndInitialAutoComplete();
+            readOutTable();
         }
 
         /*
@@ -422,6 +396,120 @@ namespace GroundHopping
             {
 
             }
+        }
+
+        private void doSomething(string q)
+        {
+            sql.CommandText = q;
+            sql.ExecuteNonQuery();
+            readOutTable();
+            readOutDataBaseAndInitialAutoComplete();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
+
+            string q = "delete from groundHooping where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+        }
+
+        public void readOutTable()
+        {
+            sql.CommandText = "select * from groundHooping;";
+            OleDbDataReader reader = sql.ExecuteReader();
+            dataGridView1.Columns.Clear();
+
+            //stelle denn Kopf der Tabelle her
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                dataGridView1.Columns.Add(reader.GetName(i), reader.GetName(i));
+            }
+
+            //Daten aus der Datenbank anzeigen
+            while (reader.Read())
+            {
+                object[] row = new object[reader.FieldCount];
+                bool addedToDataGridView = false;
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+
+                    //Wenn die Filter FUnktion aktiviert ist
+                    //dann prüfe ob auch danach
+                    if (checkBoxFilterEnable.Checked == true)
+                    {
+                        addedToDataGridView = checkFilter(ref row, ref reader, i);
+                    }
+                    else
+                    {
+                        row[i] = reader[i];
+                        addedToDataGridView = true;
+                    }
+                }
+
+                //Zeile zur Tabelle hinzufügen
+                if (addedToDataGridView == true)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
+
+            }
+            reader.Close();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+                buttonDelete.Enabled = false;
+                buttonChange.Enabled = false;
+            }
+            else
+            {
+                buttonDelete.Enabled = true;
+                buttonChange.Enabled = true;
+            }
+        }
+
+        private void buttonChange_Click(object sender, EventArgs e)
+        {
+            //string q = "delete from groundHooping where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
+
+            string q = "update groundHooping set Heimmanschaft='" + textBoxHeimmanschaft.Text 
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Gastmanschaft='" + textBoxGastmanschft.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Datum='" + dateTimePickerDate.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Stadion='" + textBoxStadion.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Stadt='" + textBoxStadt.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Land='" + textBoxLand.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Ergebnis='" + textBoxErgebnis.Text
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
+
+            q = "update groundHooping set Bundesland='" + comboBoxBundesland.SelectedItem.ToString()
+                + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
+            doSomething(q);
         }
     }
 }

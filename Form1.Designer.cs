@@ -54,26 +54,28 @@
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBoxBundesland = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxBundesland = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxFilterEnable = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxFilterTo = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterLand = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterStadt = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterStadion = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterBundesland = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterDatum = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterGastManschaft = new System.Windows.Forms.ComboBox();
+            this.comboBoxFilterHeimManschaft = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.comboBoxFilterHeimManschaft = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterGastManschaft = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterDatum = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterBundesland = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterStadion = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterStadt = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterLand = new System.Windows.Forms.ComboBox();
-            this.comboBoxFilterTo = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.checkBoxFilterEnable = new System.Windows.Forms.CheckBox();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonChange = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -217,6 +219,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(1036, 193);
             this.dataGridView1.TabIndex = 35;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // button2
             // 
@@ -253,7 +256,7 @@
             this.exportierenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportNachCSVToolStripMenuItem});
             this.exportierenToolStripMenuItem.Name = "exportierenToolStripMenuItem";
-            this.exportierenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportierenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exportierenToolStripMenuItem.Text = "Exportieren";
             // 
             // exportNachCSVToolStripMenuItem
@@ -266,7 +269,7 @@
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
@@ -311,31 +314,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Partie Eingeben";
             // 
-            // groupBox2
+            // label8
             // 
-            this.groupBox2.Controls.Add(this.checkBoxFilterEnable);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.comboBoxFilterTo);
-            this.groupBox2.Controls.Add(this.comboBoxFilterLand);
-            this.groupBox2.Controls.Add(this.comboBoxFilterStadt);
-            this.groupBox2.Controls.Add(this.comboBoxFilterStadion);
-            this.groupBox2.Controls.Add(this.comboBoxFilterBundesland);
-            this.groupBox2.Controls.Add(this.comboBoxFilterDatum);
-            this.groupBox2.Controls.Add(this.comboBoxFilterGastManschaft);
-            this.groupBox2.Controls.Add(this.comboBoxFilterHeimManschaft);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(184, 219);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(725, 178);
-            this.groupBox2.TabIndex = 39;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filter Einstellen";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(520, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.TabIndex = 40;
+            this.label8.Text = "Bundesland";
             // 
             // comboBoxBundesland
             // 
@@ -364,14 +350,150 @@
             this.comboBoxBundesland.TabIndex = 33;
             this.comboBoxBundesland.ValueMember = "11";
             // 
-            // label8
+            // groupBox2
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(520, 31);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 13);
-            this.label8.TabIndex = 40;
-            this.label8.Text = "Bundesland";
+            this.groupBox2.Controls.Add(this.checkBoxFilterEnable);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.comboBoxFilterTo);
+            this.groupBox2.Controls.Add(this.comboBoxFilterLand);
+            this.groupBox2.Controls.Add(this.comboBoxFilterStadt);
+            this.groupBox2.Controls.Add(this.comboBoxFilterStadion);
+            this.groupBox2.Controls.Add(this.comboBoxFilterBundesland);
+            this.groupBox2.Controls.Add(this.comboBoxFilterDatum);
+            this.groupBox2.Controls.Add(this.comboBoxFilterGastManschaft);
+            this.groupBox2.Controls.Add(this.comboBoxFilterHeimManschaft);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Location = new System.Drawing.Point(184, 219);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(725, 178);
+            this.groupBox2.TabIndex = 39;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Filter Einstellen";
+            // 
+            // checkBoxFilterEnable
+            // 
+            this.checkBoxFilterEnable.AutoSize = true;
+            this.checkBoxFilterEnable.Location = new System.Drawing.Point(17, 147);
+            this.checkBoxFilterEnable.Name = "checkBoxFilterEnable";
+            this.checkBoxFilterEnable.Size = new System.Drawing.Size(107, 17);
+            this.checkBoxFilterEnable.TabIndex = 58;
+            this.checkBoxFilterEnable.Text = "Filtern anwenden";
+            this.checkBoxFilterEnable.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(438, 92);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.TabIndex = 57;
+            this.label13.Text = "Filtern nach";
+            // 
+            // comboBoxFilterTo
+            // 
+            this.comboBoxFilterTo.FormattingEnabled = true;
+            this.comboBoxFilterTo.Items.AddRange(new object[] {
+            "Heimmanschaft",
+            "Gastmanschaft",
+            "Datum",
+            "Bundesland",
+            "Stadion",
+            "Stadt",
+            "Land"});
+            this.comboBoxFilterTo.Location = new System.Drawing.Point(438, 108);
+            this.comboBoxFilterTo.Name = "comboBoxFilterTo";
+            this.comboBoxFilterTo.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFilterTo.TabIndex = 56;
+            // 
+            // comboBoxFilterLand
+            // 
+            this.comboBoxFilterLand.FormattingEnabled = true;
+            this.comboBoxFilterLand.Location = new System.Drawing.Point(298, 109);
+            this.comboBoxFilterLand.Name = "comboBoxFilterLand";
+            this.comboBoxFilterLand.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterLand.TabIndex = 55;
+            // 
+            // comboBoxFilterStadt
+            // 
+            this.comboBoxFilterStadt.FormattingEnabled = true;
+            this.comboBoxFilterStadt.Location = new System.Drawing.Point(150, 109);
+            this.comboBoxFilterStadt.Name = "comboBoxFilterStadt";
+            this.comboBoxFilterStadt.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterStadt.TabIndex = 54;
+            // 
+            // comboBoxFilterStadion
+            // 
+            this.comboBoxFilterStadion.FormattingEnabled = true;
+            this.comboBoxFilterStadion.Location = new System.Drawing.Point(14, 109);
+            this.comboBoxFilterStadion.Name = "comboBoxFilterStadion";
+            this.comboBoxFilterStadion.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterStadion.TabIndex = 53;
+            // 
+            // comboBoxFilterBundesland
+            // 
+            this.comboBoxFilterBundesland.FormattingEnabled = true;
+            this.comboBoxFilterBundesland.Location = new System.Drawing.Point(438, 43);
+            this.comboBoxFilterBundesland.Name = "comboBoxFilterBundesland";
+            this.comboBoxFilterBundesland.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterBundesland.TabIndex = 52;
+            // 
+            // comboBoxFilterDatum
+            // 
+            this.comboBoxFilterDatum.Enabled = false;
+            this.comboBoxFilterDatum.FormattingEnabled = true;
+            this.comboBoxFilterDatum.Location = new System.Drawing.Point(298, 43);
+            this.comboBoxFilterDatum.Name = "comboBoxFilterDatum";
+            this.comboBoxFilterDatum.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterDatum.TabIndex = 51;
+            // 
+            // comboBoxFilterGastManschaft
+            // 
+            this.comboBoxFilterGastManschaft.FormattingEnabled = true;
+            this.comboBoxFilterGastManschaft.Location = new System.Drawing.Point(150, 43);
+            this.comboBoxFilterGastManschaft.Name = "comboBoxFilterGastManschaft";
+            this.comboBoxFilterGastManschaft.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterGastManschaft.TabIndex = 50;
+            // 
+            // comboBoxFilterHeimManschaft
+            // 
+            this.comboBoxFilterHeimManschaft.FormattingEnabled = true;
+            this.comboBoxFilterHeimManschaft.Location = new System.Drawing.Point(17, 43);
+            this.comboBoxFilterHeimManschaft.Name = "comboBoxFilterHeimManschaft";
+            this.comboBoxFilterHeimManschaft.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxFilterHeimManschaft.TabIndex = 49;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(316, 93);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Land";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(165, 93);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(32, 13);
+            this.label15.TabIndex = 46;
+            this.label15.Text = "Stadt";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(14, 93);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 13);
+            this.label16.TabIndex = 45;
+            this.label16.Text = "Stadion";
             // 
             // label9
             // 
@@ -409,130 +531,33 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "Heimmanschaft";
             // 
-            // label14
+            // buttonDelete
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(316, 93);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 13);
-            this.label14.TabIndex = 47;
-            this.label14.Text = "Land";
+            this.buttonDelete.Location = new System.Drawing.Point(13, 641);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 41;
+            this.buttonDelete.Text = "Löschen";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // label15
+            // buttonChange
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(165, 93);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(32, 13);
-            this.label15.TabIndex = 46;
-            this.label15.Text = "Stadt";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(14, 93);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(43, 13);
-            this.label16.TabIndex = 45;
-            this.label16.Text = "Stadion";
-            // 
-            // comboBoxFilterHeimManschaft
-            // 
-            this.comboBoxFilterHeimManschaft.FormattingEnabled = true;
-            this.comboBoxFilterHeimManschaft.Location = new System.Drawing.Point(17, 43);
-            this.comboBoxFilterHeimManschaft.Name = "comboBoxFilterHeimManschaft";
-            this.comboBoxFilterHeimManschaft.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterHeimManschaft.TabIndex = 49;
-            // 
-            // comboBoxFilterGastManschaft
-            // 
-            this.comboBoxFilterGastManschaft.FormattingEnabled = true;
-            this.comboBoxFilterGastManschaft.Location = new System.Drawing.Point(150, 43);
-            this.comboBoxFilterGastManschaft.Name = "comboBoxFilterGastManschaft";
-            this.comboBoxFilterGastManschaft.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterGastManschaft.TabIndex = 50;
-            // 
-            // comboBoxFilterDatum
-            // 
-            this.comboBoxFilterDatum.Enabled = false;
-            this.comboBoxFilterDatum.FormattingEnabled = true;
-            this.comboBoxFilterDatum.Location = new System.Drawing.Point(298, 43);
-            this.comboBoxFilterDatum.Name = "comboBoxFilterDatum";
-            this.comboBoxFilterDatum.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterDatum.TabIndex = 51;
-            // 
-            // comboBoxFilterBundesland
-            // 
-            this.comboBoxFilterBundesland.FormattingEnabled = true;
-            this.comboBoxFilterBundesland.Location = new System.Drawing.Point(438, 43);
-            this.comboBoxFilterBundesland.Name = "comboBoxFilterBundesland";
-            this.comboBoxFilterBundesland.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterBundesland.TabIndex = 52;
-            // 
-            // comboBoxFilterStadion
-            // 
-            this.comboBoxFilterStadion.FormattingEnabled = true;
-            this.comboBoxFilterStadion.Location = new System.Drawing.Point(14, 109);
-            this.comboBoxFilterStadion.Name = "comboBoxFilterStadion";
-            this.comboBoxFilterStadion.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterStadion.TabIndex = 53;
-            // 
-            // comboBoxFilterStadt
-            // 
-            this.comboBoxFilterStadt.FormattingEnabled = true;
-            this.comboBoxFilterStadt.Location = new System.Drawing.Point(150, 109);
-            this.comboBoxFilterStadt.Name = "comboBoxFilterStadt";
-            this.comboBoxFilterStadt.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterStadt.TabIndex = 54;
-            // 
-            // comboBoxFilterLand
-            // 
-            this.comboBoxFilterLand.FormattingEnabled = true;
-            this.comboBoxFilterLand.Location = new System.Drawing.Point(298, 109);
-            this.comboBoxFilterLand.Name = "comboBoxFilterLand";
-            this.comboBoxFilterLand.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxFilterLand.TabIndex = 55;
-            // 
-            // comboBoxFilterTo
-            // 
-            this.comboBoxFilterTo.FormattingEnabled = true;
-            this.comboBoxFilterTo.Items.AddRange(new object[] {
-            "Heimmanschaft",
-            "Gastmanschaft",
-            "Datum",
-            "Bundesland",
-            "Stadion",
-            "Stadt",
-            "Land"});
-            this.comboBoxFilterTo.Location = new System.Drawing.Point(438, 108);
-            this.comboBoxFilterTo.Name = "comboBoxFilterTo";
-            this.comboBoxFilterTo.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFilterTo.TabIndex = 56;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(438, 92);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 13);
-            this.label13.TabIndex = 57;
-            this.label13.Text = "Filtern nach";
-            // 
-            // checkBoxFilterEnable
-            // 
-            this.checkBoxFilterEnable.AutoSize = true;
-            this.checkBoxFilterEnable.Location = new System.Drawing.Point(17, 147);
-            this.checkBoxFilterEnable.Name = "checkBoxFilterEnable";
-            this.checkBoxFilterEnable.Size = new System.Drawing.Size(107, 17);
-            this.checkBoxFilterEnable.TabIndex = 58;
-            this.checkBoxFilterEnable.Text = "Filtern anwenden";
-            this.checkBoxFilterEnable.UseVisualStyleBackColor = true;
+            this.buttonChange.Location = new System.Drawing.Point(94, 641);
+            this.buttonChange.Name = "buttonChange";
+            this.buttonChange.Size = new System.Drawing.Size(75, 23);
+            this.buttonChange.TabIndex = 42;
+            this.buttonChange.Text = "Ändern";
+            this.buttonChange.UseVisualStyleBackColor = true;
+            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 676);
+            this.Controls.Add(this.buttonChange);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -601,6 +626,8 @@
         private System.Windows.Forms.CheckBox checkBoxFilterEnable;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBoxFilterTo;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonChange;
     }
 }
 
