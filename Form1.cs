@@ -140,6 +140,8 @@ namespace GroundHopping
                     Array.Resize(ref landArray, landArray.Length + 1);
                     landArray[landArray.Length - 1] = neuerVerein;
                     comboBoxFilterLand.Items.Add(neuerVerein);
+
+                    //Länderspielpunkte inkrementieren
                     mCountryCounter++;
                 }
 
