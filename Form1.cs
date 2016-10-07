@@ -14,7 +14,7 @@ namespace GroundHopping
 {
     public partial class Form1 : Form
     {
-        enum DataBaseEntrys
+        enum DataBaseGroundHoppingEntrys
         {
             ID,
             HeimManschaft,
@@ -24,6 +24,13 @@ namespace GroundHopping
             Stadt,
             Land,
             Ergebnis,
+            Bundesland
+        };
+
+        enum DataBaseClubEntrys
+        {
+            ID,
+            Club,
             Bundesland
         };
 
@@ -60,6 +67,7 @@ namespace GroundHopping
             comboBoxBundesland.SelectedIndex = 11;
             comboBoxFilterTo.SelectedIndex = 0;
             readOutTable();
+            readClubList();
         }
 
         /*
@@ -69,9 +77,6 @@ namespace GroundHopping
         private void readOutDataBaseAndInitialAutoComplete()
         {
             //Read out the Data Base for the Auto Complete function
-            mSql.CommandText = "select * from groundHooping;";
-            OleDbDataReader reader = mSql.ExecuteReader();
-
             string[] ManschaftsArray;
             string[] stadionArray;
             string[] landArray;
@@ -91,31 +96,39 @@ namespace GroundHopping
             comboBoxFilterStadt.Items.Clear();
             comboBoxFilterLand.Items.Clear();
             comboBoxFilterDatum.Items.Clear();
+            comboBoxHeimmanschaft.Items.Clear();
+            comboBoxGastmanschaft.Items.Clear();
             mCountryCounter = 0;
 
+            //Read out the Data Base for the Auto Complete function
+            mSql.CommandText = "select * from Vereine;";
+            OleDbDataReader reader = mSql.ExecuteReader();
             //werte aus der Datenbank holen und in Temporäre Arrays speichern
             while (reader.Read())
             {
-                string neuerVerein = reader[(int)DataBaseEntrys.HeimManschaft].ToString();
+                string neuerVerein = reader[(int)DataBaseClubEntrys.Club].ToString();
 
                 if (isNotInList(ManschaftsArray, neuerVerein))
                 {
                     Array.Resize(ref ManschaftsArray, ManschaftsArray.Length + 1);
                     ManschaftsArray[ManschaftsArray.Length - 1] = neuerVerein;
                     comboBoxFilterHeimManschaft.Items.Add(neuerVerein);
-                }
-
-                neuerVerein = reader[(int)DataBaseEntrys.GastManschaft].ToString();
-
-                if (isNotInList(ManschaftsArray, neuerVerein))
-                {
-                    Array.Resize(ref ManschaftsArray, ManschaftsArray.Length + 1);
-                    ManschaftsArray[ManschaftsArray.Length - 1] = neuerVerein;
                     comboBoxFilterGastManschaft.Items.Add(neuerVerein);
+                    comboBoxHeimmanschaft.Items.Add(neuerVerein);
+                    comboBoxGastmanschaft.Items.Add(neuerVerein);
                 }
+            }
 
+            reader.Close();
 
-                neuerVerein = reader[(int)DataBaseEntrys.Stadion].ToString();
+            mSql.CommandText = "select * from groundHooping;";
+            reader = mSql.ExecuteReader();
+            //werte aus der Datenbank holen und in Temporäre Arrays speichern
+            while (reader.Read())
+            {
+                string neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.HeimManschaft].ToString();
+
+                neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Stadion].ToString();
 
                 if (isNotInList(stadionArray, neuerVerein))
                 {
@@ -124,7 +137,7 @@ namespace GroundHopping
                     comboBoxFilterStadion.Items.Add(neuerVerein);
                 }
 
-                neuerVerein = reader[(int)DataBaseEntrys.Stadt].ToString();
+                neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Stadt].ToString();
 
                 if (isNotInList(stadtArray, neuerVerein))
                 {
@@ -133,7 +146,7 @@ namespace GroundHopping
                     comboBoxFilterStadt.Items.Add(neuerVerein);
                 }
 
-                neuerVerein = reader[(int)DataBaseEntrys.Land].ToString();
+                neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Land].ToString();
 
                 if (isNotInList(landArray, neuerVerein))
                 {
@@ -145,7 +158,7 @@ namespace GroundHopping
                     mCountryCounter++;
                 }
 
-                neuerVerein = reader[(int)DataBaseEntrys.Bundesland].ToString();
+                neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Bundesland].ToString();
 
                 if (isNotInList(bundeslandArray, neuerVerein))
                 {
@@ -174,13 +187,13 @@ namespace GroundHopping
             var sourceLand = new AutoCompleteStringCollection();
             sourceLand.AddRange(landArray);
 
-            textBoxHeimmanschaft.AutoCompleteCustomSource = sourceManschaften;
-            textBoxHeimmanschaft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBoxHeimmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            comboBoxHeimmanschaft.AutoCompleteCustomSource = sourceManschaften;
+            comboBoxHeimmanschaft.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBoxHeimmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            textBoxGastmanschaft.AutoCompleteCustomSource = sourceManschaften;
-            textBoxGastmanschaft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBoxGastmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            comboBoxGastmanschaft.AutoCompleteCustomSource = sourceManschaften;
+            comboBoxGastmanschaft.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxGastmanschaft.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             textBoxStadion.AutoCompleteCustomSource = sourceStadion;
             textBoxStadion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -194,7 +207,13 @@ namespace GroundHopping
             textBoxLand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxLand.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
+            textBoxEntryClub.AutoCompleteCustomSource = sourceManschaften;
+            textBoxEntryClub.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBoxEntryClub.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
             labelCountryPoints.Text = mCountryCounter.ToString();
+            comboBoxHeimmanschaft.SelectedIndex = 0;
+            comboBoxGastmanschaft.SelectedIndex = 0;
         }
 
         /*
@@ -235,49 +254,49 @@ namespace GroundHopping
             switch (comboBoxFilterTo.SelectedIndex)
             {
                 case 0:
-                    if (comboBoxFilterHeimManschaft.SelectedItem.ToString() == reader[(int)DataBaseEntrys.HeimManschaft].ToString())
+                    if (comboBoxFilterHeimManschaft.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.HeimManschaft].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 1:
-                    if (comboBoxFilterGastManschaft.SelectedItem.ToString() == reader[(int)DataBaseEntrys.GastManschaft].ToString())
+                    if (comboBoxFilterGastManschaft.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.GastManschaft].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 2:
-                    if (comboBoxFilterDatum.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Datum].ToString())
+                    if (comboBoxFilterDatum.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.Datum].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 3:
-                    if (comboBoxFilterBundesland.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Bundesland].ToString())
+                    if (comboBoxFilterBundesland.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.Bundesland].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 4:
-                    if (comboBoxFilterStadion.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Stadion].ToString())
+                    if (comboBoxFilterStadion.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.Stadion].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 5:
-                    if (comboBoxFilterStadt.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Stadt].ToString())
+                    if (comboBoxFilterStadt.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.Stadt].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
                     }
                     break;
                 case 6:
-                    if (comboBoxFilterLand.SelectedItem.ToString() == reader[(int)DataBaseEntrys.Land].ToString())
+                    if (comboBoxFilterLand.SelectedItem.ToString() == reader[(int)DataBaseGroundHoppingEntrys.Land].ToString())
                     {
                         row[i] = reader[i];
                         addedToDataGridView = true;
@@ -298,9 +317,28 @@ namespace GroundHopping
         {
             checkBoxFilterEnable.Checked = false;
 
+            if (comboBoxHeimmanschaft.SelectedIndex == -1
+                || comboBoxGastmanschaft.SelectedIndex == -1)
+            {
+                string message = "Falsche Eingabe der Daten ";
+                string caption = "Falsche Eingabe der Daten ";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = MessageBox.Show(message, caption, buttons);
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+
+                }
+                return;
+            }
+
             mSql.CommandText = "insert into groundHooping(Heimmanschaft, Gastmanschaft, Datum, Stadion, Stadt, Land, Ergebnis, Bundesland)" +
-                   " values('" + textBoxHeimmanschaft.Text + "', '"
-                              + textBoxGastmanschaft.Text + "', '"
+                   " values('" + comboBoxHeimmanschaft.SelectedItem.ToString() + "', '"
+                              + comboBoxGastmanschaft.SelectedItem.ToString() + "', '"
                               + dateTimePickerDate.Text + "', '"
                               + textBoxStadion.Text + "', '"
                               + textBoxStadt.Text + "', '"
@@ -311,8 +349,8 @@ namespace GroundHopping
 
             label8.Text = comboBoxBundesland.SelectedItem.ToString();
 
-            if (textBoxHeimmanschaft.Text.ToLower() == "1.fc köln"
-                || textBoxGastmanschaft.Text.ToLower() == "1.fc köln")
+            if (comboBoxHeimmanschaft.SelectedItem.ToString().ToLower() == "1.fc köln"
+                || comboBoxGastmanschaft.SelectedItem.ToString().ToLower() == "1.fc köln")
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
 
@@ -486,6 +524,8 @@ namespace GroundHopping
                 buttonDelete.Enabled = true;
                 buttonChange.Enabled = true;
             }
+
+            
         }
 
         //ändere daten der aktuell angewählten zeile
@@ -494,11 +534,11 @@ namespace GroundHopping
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
-            string q = "update groundHooping set Heimmanschaft='" + textBoxHeimmanschaft.Text
+            string q = "update groundHooping set Heimmanschaft='" + comboBoxHeimmanschaft.SelectedItem.ToString()
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
 
-            q = "update groundHooping set Gastmanschaft='" + textBoxGastmanschaft.Text
+            q = "update groundHooping set Gastmanschaft='" + comboBoxGastmanschaft.SelectedItem.ToString()
                 + "'where id=" + dataGridView1[columnIndex, rowIndex].Value.ToString();
             doSomething(q);
 
@@ -531,5 +571,81 @@ namespace GroundHopping
         {
             readOutTable();
         }
+
+        private void buttonSaveClub_Click(object sender, EventArgs e)
+        {
+            if (textBoxEntryClub.Text != String.Empty
+                && comboBoxBundeslandEntry.SelectedIndex != -1
+                )
+            {
+                mSql.CommandText = "insert into Vereine(Verein, Bundesland)" +
+                       " values('" + textBoxEntryClub.Text + "', '"
+                                   + comboBoxBundeslandEntry.SelectedIndex + "');";
+                mSql.ExecuteNonQuery();
+
+                readClubList();
+                readOutTable();
+                readOutDataBaseAndInitialAutoComplete();
+            }
+        }
+
+        private void comboBoxHeimmanschaft_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mSql.CommandText = "select * from Vereine;";
+            OleDbDataReader reader = mSql.ExecuteReader();
+
+              
+
+            //Daten aus der Datenbank anzeigen
+            while (reader.Read())
+            {
+                object[] row = new object[reader.FieldCount];
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+
+                    if(reader[(int)DataBaseClubEntrys.Club].ToString() == comboBoxHeimmanschaft.SelectedItem.ToString())
+                    {
+                        comboBoxBundesland.SelectedIndex = (int)reader[(int)DataBaseClubEntrys.Bundesland];
+                    }
+                }
+            }
+            reader.Close();
+        }
+
+        private void buttonReadOutClub_Click(object sender, EventArgs e)
+        {
+            readClubList();
+        }
+
+        private void readClubList()
+        {
+            mSql.CommandText = "select * from Vereine;";
+            OleDbDataReader reader = mSql.ExecuteReader();
+            dataGridView2.Columns.Clear();
+
+            //stelle denn Kopf der Tabelle her
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                dataGridView2.Columns.Add(reader.GetName(i), reader.GetName(i));
+            }
+
+            //Daten aus der Datenbank anzeigen
+            while (reader.Read())
+            {
+                object[] row = new object[reader.FieldCount];
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+
+                    row[i] = reader[i];
+                }
+
+                dataGridView2.Rows.Add(row);
+
+            }
+            reader.Close();
+        }
+
     }
 }

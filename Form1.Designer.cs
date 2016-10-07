@@ -41,8 +41,6 @@
             this.textBoxStadt = new System.Windows.Forms.TextBox();
             this.textBoxLand = new System.Windows.Forms.TextBox();
             this.textBoxStadion = new System.Windows.Forms.TextBox();
-            this.textBoxGastmanschaft = new System.Windows.Forms.TextBox();
-            this.textBoxHeimmanschaft = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -53,6 +51,8 @@
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxGastmanschaft = new System.Windows.Forms.ComboBox();
+            this.comboBoxHeimmanschaft = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxBundesland = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -77,13 +77,28 @@
             this.buttonChange = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.labelCountryPoints = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonReadOutClub = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBoxBundeslandEntry = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.buttonSaveClub = new System.Windows.Forms.Button();
+            this.textBoxEntryClub = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label7
@@ -199,26 +214,10 @@
             this.textBoxStadion.TabIndex = 20;
             this.textBoxStadion.Text = "Koblenz";
             // 
-            // textBoxGastmanschaft
-            // 
-            this.textBoxGastmanschaft.Location = new System.Drawing.Point(165, 50);
-            this.textBoxGastmanschaft.Name = "textBoxGastmanschaft";
-            this.textBoxGastmanschaft.Size = new System.Drawing.Size(145, 20);
-            this.textBoxGastmanschaft.TabIndex = 19;
-            this.textBoxGastmanschaft.Text = "Eintracht Frankfurt";
-            // 
-            // textBoxHeimmanschaft
-            // 
-            this.textBoxHeimmanschaft.Location = new System.Drawing.Point(14, 50);
-            this.textBoxHeimmanschaft.Name = "textBoxHeimmanschaft";
-            this.textBoxHeimmanschaft.Size = new System.Drawing.Size(145, 20);
-            this.textBoxHeimmanschaft.TabIndex = 18;
-            this.textBoxHeimmanschaft.Text = "Tus Koblenz";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 410);
+            this.dataGridView1.Location = new System.Drawing.Point(51, 403);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(1079, 193);
@@ -232,7 +231,7 @@
             this.hilfeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1111, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1242, 24);
             this.menuStrip1.TabIndex = 37;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -284,6 +283,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxGastmanschaft);
+            this.groupBox1.Controls.Add(this.comboBoxHeimmanschaft);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.comboBoxBundesland);
             this.groupBox1.Controls.Add(this.label7);
@@ -299,14 +300,29 @@
             this.groupBox1.Controls.Add(this.textBoxStadt);
             this.groupBox1.Controls.Add(this.textBoxLand);
             this.groupBox1.Controls.Add(this.textBoxStadion);
-            this.groupBox1.Controls.Add(this.textBoxGastmanschaft);
-            this.groupBox1.Controls.Add(this.textBoxHeimmanschaft);
-            this.groupBox1.Location = new System.Drawing.Point(184, 27);
+            this.groupBox1.Location = new System.Drawing.Point(220, 20);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(725, 171);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Partie Eingeben";
+            // 
+            // comboBoxGastmanschaft
+            // 
+            this.comboBoxGastmanschaft.FormattingEnabled = true;
+            this.comboBoxGastmanschaft.Location = new System.Drawing.Point(165, 48);
+            this.comboBoxGastmanschaft.Name = "comboBoxGastmanschaft";
+            this.comboBoxGastmanschaft.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxGastmanschaft.TabIndex = 42;
+            // 
+            // comboBoxHeimmanschaft
+            // 
+            this.comboBoxHeimmanschaft.FormattingEnabled = true;
+            this.comboBoxHeimmanschaft.Location = new System.Drawing.Point(14, 48);
+            this.comboBoxHeimmanschaft.Name = "comboBoxHeimmanschaft";
+            this.comboBoxHeimmanschaft.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxHeimmanschaft.TabIndex = 41;
+            this.comboBoxHeimmanschaft.SelectedIndexChanged += new System.EventHandler(this.comboBoxHeimmanschaft_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -320,6 +336,7 @@
             // comboBoxBundesland
             // 
             this.comboBoxBundesland.DisplayMember = "11";
+            this.comboBoxBundesland.Enabled = false;
             this.comboBoxBundesland.FormattingEnabled = true;
             this.comboBoxBundesland.Items.AddRange(new object[] {
             "kein Deutschland",
@@ -363,7 +380,7 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(184, 219);
+            this.groupBox2.Location = new System.Drawing.Point(220, 212);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(725, 178);
             this.groupBox2.TabIndex = 39;
@@ -527,7 +544,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(13, 641);
+            this.buttonDelete.Location = new System.Drawing.Point(49, 634);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 41;
@@ -537,7 +554,7 @@
             // 
             // buttonChange
             // 
-            this.buttonChange.Location = new System.Drawing.Point(94, 641);
+            this.buttonChange.Location = new System.Drawing.Point(130, 634);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(75, 23);
             this.buttonChange.TabIndex = 42;
@@ -547,7 +564,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(834, 641);
+            this.button2.Location = new System.Drawing.Point(870, 634);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 34;
@@ -559,21 +576,12 @@
             // 
             this.groupBox3.Controls.Add(this.labelCountryPoints);
             this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Location = new System.Drawing.Point(923, 27);
+            this.groupBox3.Location = new System.Drawing.Point(959, 20);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(171, 369);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info\'s";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(7, 20);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(73, 13);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Länderpunkte";
             // 
             // labelCountryPoints
             // 
@@ -584,18 +592,159 @@
             this.labelCountryPoints.TabIndex = 1;
             this.labelCountryPoints.Text = "label18";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(7, 20);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Länderpunkte";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1181, 708);
+            this.tabControl1.TabIndex = 44;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.buttonChange);
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.buttonDelete);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1173, 682);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Datenbank";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.buttonReadOutClub);
+            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1173, 682);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Vereinsmanagment";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonReadOutClub
+            // 
+            this.buttonReadOutClub.Location = new System.Drawing.Point(1041, 508);
+            this.buttonReadOutClub.Name = "buttonReadOutClub";
+            this.buttonReadOutClub.Size = new System.Drawing.Size(75, 23);
+            this.buttonReadOutClub.TabIndex = 37;
+            this.buttonReadOutClub.Text = "Auslesen";
+            this.buttonReadOutClub.UseVisualStyleBackColor = true;
+            this.buttonReadOutClub.Click += new System.EventHandler(this.buttonReadOutClub_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(37, 290);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.Size = new System.Drawing.Size(1079, 193);
+            this.dataGridView2.TabIndex = 36;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.comboBoxBundeslandEntry);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.buttonSaveClub);
+            this.groupBox4.Controls.Add(this.textBoxEntryClub);
+            this.groupBox4.Location = new System.Drawing.Point(31, 21);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(182, 167);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Verein Eingeben";
+            // 
+            // comboBoxBundeslandEntry
+            // 
+            this.comboBoxBundeslandEntry.AutoCompleteCustomSource.AddRange(new string[] {
+            "kein Deutschland",
+            "Baden-Württemberg",
+            "Bayern",
+            "Berlin",
+            "Brandenburg",
+            "Bremen",
+            "Hamburg",
+            "Hessen",
+            "Mecklenburg - Vorpommern",
+            "Niedersachsen",
+            "Nordrhein - Westfalen",
+            "Rheinland - Pfalz",
+            "Saarland",
+            "Sachsen - Anhalt"});
+            this.comboBoxBundeslandEntry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBundeslandEntry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxBundeslandEntry.FormattingEnabled = true;
+            this.comboBoxBundeslandEntry.Items.AddRange(new object[] {
+            "kein Deutschland",
+            "Baden-Württemberg",
+            "Bayern",
+            "Berlin",
+            "Brandenburg",
+            "Bremen",
+            "Hamburg",
+            "Hessen",
+            "Mecklenburg - Vorpommern",
+            "Niedersachsen",
+            "Nordrhein - Westfalen",
+            "Rheinland - Pfalz",
+            "Saarland",
+            "Sachsen - Anhalt"});
+            this.comboBoxBundeslandEntry.Location = new System.Drawing.Point(6, 81);
+            this.comboBoxBundeslandEntry.Name = "comboBoxBundeslandEntry";
+            this.comboBoxBundeslandEntry.Size = new System.Drawing.Size(170, 21);
+            this.comboBoxBundeslandEntry.TabIndex = 4;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Verein";
+            // 
+            // buttonSaveClub
+            // 
+            this.buttonSaveClub.Location = new System.Drawing.Point(6, 124);
+            this.buttonSaveClub.Name = "buttonSaveClub";
+            this.buttonSaveClub.Size = new System.Drawing.Size(100, 23);
+            this.buttonSaveClub.TabIndex = 2;
+            this.buttonSaveClub.Text = "Verein speichern";
+            this.buttonSaveClub.UseVisualStyleBackColor = true;
+            this.buttonSaveClub.Click += new System.EventHandler(this.buttonSaveClub_Click);
+            // 
+            // textBoxEntryClub
+            // 
+            this.textBoxEntryClub.Location = new System.Drawing.Point(6, 38);
+            this.textBoxEntryClub.Name = "textBoxEntryClub";
+            this.textBoxEntryClub.Size = new System.Drawing.Size(170, 20);
+            this.textBoxEntryClub.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 676);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.buttonChange);
-            this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1242, 760);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -609,6 +758,12 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -629,8 +784,6 @@
         private System.Windows.Forms.TextBox textBoxStadt;
         private System.Windows.Forms.TextBox textBoxLand;
         private System.Windows.Forms.TextBox textBoxStadion;
-        private System.Windows.Forms.TextBox textBoxGastmanschaft;
-        private System.Windows.Forms.TextBox textBoxHeimmanschaft;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -641,9 +794,7 @@
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem überToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBoxBundesland;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBoxFilterLand;
         private System.Windows.Forms.ComboBox comboBoxFilterStadt;
         private System.Windows.Forms.ComboBox comboBoxFilterStadion;
@@ -667,6 +818,20 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label labelCountryPoints;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox comboBoxBundeslandEntry;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button buttonSaveClub;
+        private System.Windows.Forms.TextBox textBoxEntryClub;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBoxBundesland;
+        private System.Windows.Forms.ComboBox comboBoxGastmanschaft;
+        private System.Windows.Forms.ComboBox comboBoxHeimmanschaft;
+        private System.Windows.Forms.Button buttonReadOutClub;
     }
 }
 
