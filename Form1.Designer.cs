@@ -82,6 +82,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.comboBoxBundeslandChange = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.buttonChangeClub = new System.Windows.Forms.Button();
+            this.textBoxClubChange = new System.Windows.Forms.TextBox();
             this.buttonReadOutClub = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -97,6 +102,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -630,6 +636,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.buttonReadOutClub);
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Controls.Add(this.groupBox4);
@@ -641,9 +648,88 @@
             this.tabPage2.Text = "Vereinsmanagment";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.comboBoxBundeslandChange);
+            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this.buttonChangeClub);
+            this.groupBox5.Controls.Add(this.textBoxClubChange);
+            this.groupBox5.Location = new System.Drawing.Point(219, 21);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(182, 167);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Verein Ändern";
+            // 
+            // comboBoxBundeslandChange
+            // 
+            this.comboBoxBundeslandChange.AutoCompleteCustomSource.AddRange(new string[] {
+            "kein Deutschland",
+            "Baden-Württemberg",
+            "Bayern",
+            "Berlin",
+            "Brandenburg",
+            "Bremen",
+            "Hamburg",
+            "Hessen",
+            "Mecklenburg - Vorpommern",
+            "Niedersachsen",
+            "Nordrhein - Westfalen",
+            "Rheinland - Pfalz",
+            "Saarland",
+            "Sachsen - Anhalt"});
+            this.comboBoxBundeslandChange.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBundeslandChange.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxBundeslandChange.FormattingEnabled = true;
+            this.comboBoxBundeslandChange.Items.AddRange(new object[] {
+            "kein Deutschland",
+            "Baden-Württemberg",
+            "Bayern",
+            "Berlin",
+            "Brandenburg",
+            "Bremen",
+            "Hamburg",
+            "Hessen",
+            "Mecklenburg - Vorpommern",
+            "Niedersachsen",
+            "Nordrhein - Westfalen",
+            "Rheinland - Pfalz",
+            "Saarland",
+            "Sachsen - Anhalt"});
+            this.comboBoxBundeslandChange.Location = new System.Drawing.Point(6, 81);
+            this.comboBoxBundeslandChange.Name = "comboBoxBundeslandChange";
+            this.comboBoxBundeslandChange.Size = new System.Drawing.Size(170, 21);
+            this.comboBoxBundeslandChange.TabIndex = 4;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(7, 20);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(37, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Verein";
+            // 
+            // buttonChangeClub
+            // 
+            this.buttonChangeClub.Location = new System.Drawing.Point(6, 124);
+            this.buttonChangeClub.Name = "buttonChangeClub";
+            this.buttonChangeClub.Size = new System.Drawing.Size(100, 23);
+            this.buttonChangeClub.TabIndex = 2;
+            this.buttonChangeClub.Text = "Verein ändern";
+            this.buttonChangeClub.UseVisualStyleBackColor = true;
+            this.buttonChangeClub.Click += new System.EventHandler(this.buttonChangeClub_Click);
+            // 
+            // textBoxClubChange
+            // 
+            this.textBoxClubChange.Location = new System.Drawing.Point(6, 38);
+            this.textBoxClubChange.Name = "textBoxClubChange";
+            this.textBoxClubChange.Size = new System.Drawing.Size(170, 20);
+            this.textBoxClubChange.TabIndex = 0;
+            // 
             // buttonReadOutClub
             // 
-            this.buttonReadOutClub.Location = new System.Drawing.Point(1041, 508);
+            this.buttonReadOutClub.Location = new System.Drawing.Point(1057, 507);
             this.buttonReadOutClub.Name = "buttonReadOutClub";
             this.buttonReadOutClub.Size = new System.Drawing.Size(75, 23);
             this.buttonReadOutClub.TabIndex = 37;
@@ -654,11 +740,12 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(37, 290);
+            this.dataGridView2.Location = new System.Drawing.Point(31, 194);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(1079, 193);
+            this.dataGridView2.Size = new System.Drawing.Size(1101, 289);
             this.dataGridView2.TabIndex = 36;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // groupBox4
             // 
@@ -761,6 +848,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -832,6 +921,11 @@
         private System.Windows.Forms.ComboBox comboBoxGastmanschaft;
         private System.Windows.Forms.ComboBox comboBoxHeimmanschaft;
         private System.Windows.Forms.Button buttonReadOutClub;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox comboBoxBundeslandChange;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button buttonChangeClub;
+        private System.Windows.Forms.TextBox textBoxClubChange;
     }
 }
 

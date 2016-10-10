@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GroundHopping.exe" size="33752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GroundHopping.exe" size="36312">
       <assemblyIdentity name="GroundHopping" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ROGtjfu7ReEXWO1EnwPxwkTQUKeV6siEDly7fi38DX4=</dsig:DigestValue>
+        <dsig:DigestValue>KDvW9sud8jNii/Pam9hyUW0yP048TsqWEk2+9sAY1dk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

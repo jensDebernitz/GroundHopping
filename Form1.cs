@@ -39,6 +39,8 @@ namespace GroundHopping
         private OleDbCommand mSql;
         private Int64 mCountryCounter;
 
+        private dataBaseClubEntrys mDataBaseClubEntrys;
+
         public Form1()
         {
             InitializeComponent();
@@ -52,6 +54,8 @@ namespace GroundHopping
             mCon.Open();
 
             mSql = mCon.CreateCommand();
+
+            mDataBaseClubEntrys = new dataBaseClubEntrys(ref mCon, ref mSql);
 
             // Set the Format type and the CustomFormat string.
             dateTimePickerDate.Format = DateTimePickerFormat.Custom;
@@ -67,7 +71,7 @@ namespace GroundHopping
             comboBoxBundesland.SelectedIndex = 11;
             comboBoxFilterTo.SelectedIndex = 0;
             readOutTable();
-            readClubList();
+            mDataBaseClubEntrys.readClubList(ref dataGridView2);
         }
 
         /*
@@ -100,6 +104,8 @@ namespace GroundHopping
             comboBoxGastmanschaft.Items.Clear();
             mCountryCounter = 0;
 
+            miscClass misc = new miscClass();
+
             //Read out the Data Base for the Auto Complete function
             mSql.CommandText = "select * from Vereine;";
             OleDbDataReader reader = mSql.ExecuteReader();
@@ -108,7 +114,7 @@ namespace GroundHopping
             {
                 string neuerVerein = reader[(int)DataBaseClubEntrys.Club].ToString();
 
-                if (isNotInList(ManschaftsArray, neuerVerein))
+                if (misc.isNotInList(ManschaftsArray, neuerVerein))
                 {
                     Array.Resize(ref ManschaftsArray, ManschaftsArray.Length + 1);
                     ManschaftsArray[ManschaftsArray.Length - 1] = neuerVerein;
@@ -130,7 +136,7 @@ namespace GroundHopping
 
                 neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Stadion].ToString();
 
-                if (isNotInList(stadionArray, neuerVerein))
+                if (misc.isNotInList(stadionArray, neuerVerein))
                 {
                     Array.Resize(ref stadionArray, stadionArray.Length + 1);
                     stadionArray[stadionArray.Length - 1] = neuerVerein;
@@ -139,7 +145,7 @@ namespace GroundHopping
 
                 neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Stadt].ToString();
 
-                if (isNotInList(stadtArray, neuerVerein))
+                if (misc.isNotInList(stadtArray, neuerVerein))
                 {
                     Array.Resize(ref stadtArray, stadtArray.Length + 1);
                     stadtArray[stadtArray.Length - 1] = neuerVerein;
@@ -148,7 +154,7 @@ namespace GroundHopping
 
                 neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Land].ToString();
 
-                if (isNotInList(landArray, neuerVerein))
+                if (misc.isNotInList(landArray, neuerVerein))
                 {
                     Array.Resize(ref landArray, landArray.Length + 1);
                     landArray[landArray.Length - 1] = neuerVerein;
@@ -160,7 +166,7 @@ namespace GroundHopping
 
                 neuerVerein = reader[(int)DataBaseGroundHoppingEntrys.Bundesland].ToString();
 
-                if (isNotInList(bundeslandArray, neuerVerein))
+                if (misc.isNotInList(bundeslandArray, neuerVerein))
                 {
                     Array.Resize(ref bundeslandArray, bundeslandArray.Length + 1);
                     bundeslandArray[bundeslandArray.Length - 1] = neuerVerein;
@@ -214,23 +220,6 @@ namespace GroundHopping
             labelCountryPoints.Text = mCountryCounter.ToString();
             comboBoxHeimmanschaft.SelectedIndex = 0;
             comboBoxGastmanschaft.SelectedIndex = 0;
-        }
-
-        /*
-         * Prüfen ob neuer string im string Array schon enthalten ist
-         */
-        private bool isNotInList(string[] inList, string newValue)
-        {
-            bool returnValue = true;
-
-            for (int i = 0; i < inList.Length; i++)
-            {
-                if (newValue == inList[i])
-                {
-                    returnValue = false;
-                }
-            }
-            return returnValue;
         }
 
         /*
@@ -453,7 +442,9 @@ namespace GroundHopping
             mSql.ExecuteNonQuery();
             readOutTable();
             readOutDataBaseAndInitialAutoComplete();
+
         }
+
 
         //lösche aktuelle Zeile
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -492,7 +483,6 @@ namespace GroundHopping
                     if (checkBoxFilterEnable.Checked == true)
                     {
                         addedToDataGridView = checkFilter(ref row, ref reader, i);
-                        checkBoxFilterEnable.Checked = false;
                     }
                     else
                     {
@@ -509,6 +499,7 @@ namespace GroundHopping
 
             }
             reader.Close();
+            checkBoxFilterEnable.Checked = false;
         }
 
         //wenn die erste Spalte nicht null ist können wir nicht löschen und nicht ändern
@@ -578,12 +569,8 @@ namespace GroundHopping
                 && comboBoxBundeslandEntry.SelectedIndex != -1
                 )
             {
-                mSql.CommandText = "insert into Vereine(Verein, Bundesland)" +
-                       " values('" + textBoxEntryClub.Text + "', '"
-                                   + comboBoxBundeslandEntry.SelectedIndex + "');";
-                mSql.ExecuteNonQuery();
-
-                readClubList();
+                mDataBaseClubEntrys.insertClubToDataBase(textBoxEntryClub.Text, comboBoxBundeslandEntry.SelectedIndex);
+                mDataBaseClubEntrys.readClubList(ref dataGridView2);
                 readOutTable();
                 readOutDataBaseAndInitialAutoComplete();
             }
@@ -593,8 +580,6 @@ namespace GroundHopping
         {
             mSql.CommandText = "select * from Vereine;";
             OleDbDataReader reader = mSql.ExecuteReader();
-
-              
 
             //Daten aus der Datenbank anzeigen
             while (reader.Read())
@@ -615,37 +600,25 @@ namespace GroundHopping
 
         private void buttonReadOutClub_Click(object sender, EventArgs e)
         {
-            readClubList();
+            mDataBaseClubEntrys.readClubList(ref dataGridView2);
         }
 
-        private void readClubList()
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {                                  
+            textBoxClubChange.Text = dataGridView2[1, e.RowIndex].Value.ToString();
+            comboBoxBundeslandChange.SelectedIndex = (int)dataGridView2[2, e.RowIndex].Value;
+        }
+
+        private void buttonChangeClub_Click(object sender, EventArgs e)
         {
-            mSql.CommandText = "select * from Vereine;";
-            OleDbDataReader reader = mSql.ExecuteReader();
-            dataGridView2.Columns.Clear();
+            int rowIndex = dataGridView2.CurrentCell.RowIndex;
+            int columnIndex = dataGridView2.CurrentCell.ColumnIndex;
 
-            //stelle denn Kopf der Tabelle her
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                dataGridView2.Columns.Add(reader.GetName(i), reader.GetName(i));
-            }
-
-            //Daten aus der Datenbank anzeigen
-            while (reader.Read())
-            {
-                object[] row = new object[reader.FieldCount];
-
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-
-                    row[i] = reader[i];
-                }
-
-                dataGridView2.Rows.Add(row);
-
-            }
-            reader.Close();
+            mDataBaseClubEntrys.changeClubEntry(textBoxClubChange.Text,
+                                                (int)comboBoxBundeslandChange.SelectedIndex,
+                                                dataGridView2[columnIndex, rowIndex].Value.ToString());
+            doSomething(q);
+            mDataBaseClubEntrys.readClubList(ref dataGridView2);
         }
-
     }
 }
