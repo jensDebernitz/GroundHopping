@@ -604,9 +604,13 @@ namespace GroundHopping
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {                                  
-            textBoxClubChange.Text = dataGridView2[1, e.RowIndex].Value.ToString();
-            comboBoxBundeslandChange.SelectedIndex = (int)dataGridView2[2, e.RowIndex].Value;
+        {
+            if(e.RowIndex < (dataGridView2.RowCount-1))
+            {
+                textBoxClubChange.Text = dataGridView2[1, e.RowIndex].Value.ToString();
+                comboBoxBundeslandChange.SelectedIndex = (int)dataGridView2[2, e.RowIndex].Value;
+            }
+            
         }
 
         private void buttonChangeClub_Click(object sender, EventArgs e)
@@ -617,8 +621,8 @@ namespace GroundHopping
             mDataBaseClubEntrys.changeClubEntry(textBoxClubChange.Text,
                                                 (int)comboBoxBundeslandChange.SelectedIndex,
                                                 dataGridView2[columnIndex, rowIndex].Value.ToString());
-            doSomething(q);
             mDataBaseClubEntrys.readClubList(ref dataGridView2);
         }
+
     }
 }
